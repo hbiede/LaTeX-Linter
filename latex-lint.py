@@ -83,7 +83,7 @@ def parse_rules(rule_list: List[str]) -> (Dict[Pattern, str], List[str]):
         re.compile(
             r'(?<!(etc|seq))(?<!(al))(?<!(etal))\.\s+[a-z]'): 'Capitalization: Sentences start with capital letters'
     }
-    ignored_commands = []
+    commands_to_ignore = []
     surrounding_terms = {
         'Capitalization': r'\b',
         'Phrasing': r'\b',
@@ -103,14 +103,14 @@ def parse_rules(rule_list: List[str]) -> (Dict[Pattern, str], List[str]):
         rule_str = rule_str.strip().replace('$', r'\b')
         reasoning = reasoning.strip()
         if reasoning == 'ignoredCommand':
-            ignored_commands.append(rule_str)
+            commands_to_ignore.append(rule_str)
         else:
             surrounding_term = surrounding_terms.get(reasoning.split(':')[0].strip(), '')
             case_sensitivity = case_sensitivity_mapping.get(reasoning.split(':')[0].strip(),
                                                             re.IGNORECASE) + re.UNICODE + re.MULTILINE
             regex = re.compile(surrounding_term + rule_str.replace(' ', r'\s') + surrounding_term, case_sensitivity)
             rule_mapping[regex] = reasoning
-    return rule_mapping, ignored_commands
+    return rule_mapping, commands_to_ignore
 
 
 def read_latex() -> Dict[str, List[str]]:
@@ -148,6 +148,16 @@ def read_latex() -> Dict[str, List[str]]:
 
 def test_line(line_to_test: str, rule_patterns: Dict[Pattern, str]) \
         -> List[Tuple[Pattern, Match]]:
+    """
+    Test a given string against all rule patters
+    :param line_to_test: str
+        The string to be tested against the RegEx patterns for a match
+    :param rule_patterns: Dict[Pattern, str]
+        A dictionary mapping the list of RegEx patterns onto their reasoning strings
+    :rtype: List[Tuple[Pattern, Match]]
+    :return: A list of rules broken and the Match objects that define the start and end points of the match in the test
+        string
+    """
     rules_broken = []
     for rule in rule_patterns:
         match = rule.search(line_to_test)
@@ -157,16 +167,58 @@ def test_line(line_to_test: str, rule_patterns: Dict[Pattern, str]) \
 
 
 def remove_commands(line: str, commands: Pattern) -> str:
+    """
+    Strip a LaTeX source string of commands defined as needing to be ignored
+    :param line: str
+        The LaTeX source string
+    :param commands: Pattern
+        The pattern compiled of all the commands to ignore
+    :rtype: str
+    :return: The source string, with the commands and their arguments removed
+    """
     # noinspection RegExpRedundantEscape
     clear_of_french_spacing = re.search(r'\s[\.\?!,;:]', line) is None
     return_val = commands.sub('', line)
     if len(return_val) > 1 and clear_of_french_spacing:
-        return_val = re.sub('[~\s]*(?=[.?!,;:])', '', return_val)
+        return_val = re.sub(r'[~\s]*(?=[.?!,;:])', '', return_val)
     return return_val
+
+
+def remove_math(latex: Dict[str, List[str]]):
+    """
+    Removes all characters enclosed in a math block
+    :param latex: Dict[str, List[str]]
+        A mapping of file names onto a list of that file's lines
+    """
+    for file_name in latex:
+        file = latex[file_name]
+        math_mode: bool = False
+        for i in range(len(file)):
+            new_line = ''
+            for c in file[i]:
+                if c is '$':
+                    math_mode = not math_mode
+                elif not math_mode:
+                    new_line += c
+            file[i] = new_line
+    return latex
 
 
 def process_files(file_lines: Dict[str, List[str]], rule_patterns: Dict[Pattern, str],
                   ignored_command_regex: Pattern) -> List[str]:
+    """
+    Takes all the lines that need to be checked, removes any math blocks and commands, then checks them for broken
+        rules (including those that span multiple lines)
+    :param file_lines: Dict[str, List[str]]
+        A mapping of file names onto a list of that file's lines
+    :param rule_patterns: Dict[Pattern, str]
+        A dictionary mapping the list of RegEx patterns onto their reasoning strings
+    :param ignored_command_regex:
+        The pattern compiled of all the commands to ignore
+    :rtype: List[str]
+    :return: A list of strings reporting each rule broken formatted for output
+    """
+    remove_math(file_lines)
     errors = []
     for file_name in file_lines:
         file = file_lines[file_name]
@@ -201,23 +253,14 @@ def process_files(file_lines: Dict[str, List[str]], rule_patterns: Dict[Pattern,
 
 
 def compile_command(commands: List[str]) -> Pattern:
+    """
+    Generates a pattern to be used in removing commands from LaTeX source lines
+    :param commands: List[str]
+        A list of command names (case-sensitive) to be ignored
+    :rtype: Pattern
+    :return: The compiled pattern
+    """
     return re.compile(r'\\(' + '|'.join(commands) + r')(\[[^\]]*\])?{[^{}]*}')
-
-
-def remove_math(latex: Dict[str, List[str]]):
-    for file_name in latex:
-        file = latex[file_name]
-        math_mode: bool = False
-        for i in range(len(file)):
-            new_line = ''
-            for c in file[i]:
-                if c is '$':
-                    math_mode = not math_mode
-                elif not math_mode:
-                    new_line += c
-            file[i] = new_line
-
-    return latex_lines
 
 
 if __name__ == '__main__':
@@ -229,9 +272,7 @@ if __name__ == '__main__':
 
     command_regex = compile_command(ignored_commands)
 
-    latex_lines = read_latex()
-    remove_math(latex_lines)
-    rules_broken_report = process_files(latex_lines, rules, command_regex)
+    rules_broken_report = process_files(read_latex(), rules, command_regex)
     for rule_reported in rules_broken_report:
         print(rule_reported)
     exit()
