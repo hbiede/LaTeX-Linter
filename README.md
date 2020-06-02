@@ -136,12 +136,10 @@ other files):
 
 You can add this repository to your own as a submodule (so that it will be available
 wherever you clone your repo, while also keeping up-to-date on the latest changes with
-this one) by adding the following to a `.gitmodules` file in the root of your repository:
+this one) by running the following command:
 
 ```
-[submodule "LaTeX-Linter"]
-	path = LaTeX-Linter
-	url = https://github.com/hbiede/LaTeX-Linter
+git submodule add https://github.com/hbiede/LaTeX-Linter/
 ```
 
 
