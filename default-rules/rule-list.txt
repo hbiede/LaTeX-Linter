@@ -85,7 +85,7 @@ for\sthe\sreason\sthat                                                     % Phr
 further\smore                                                              % Phrasing: Should be "furthermore"
 great\sdeal\sof                                                            % Phrasing: Should be "much"
 grouped\stogether                                                          % Phrasing: Should be "grouped"
-grows? larger                                                              % Phrasing: Should be "grow(s)"
+grows?\slarger                                                             % Phrasing: Should be "grow(s)"
 hard\sevidence                                                             % Phrasing: Should be "evidence"
 I'll                                                                       % Phrasing: Should be "I will"
 I've                                                                       % Phrasing: Should be "I have"
@@ -100,7 +100,7 @@ literally\slike                                                            % Phr
 loosing                                                                    % Phrasing: Should be "losing", use "loosening" otherwise.
 loss\soff                                                                  % Phrasing: Should be "loss of"
 necessitate[ds]?                                                           % Phrasing: Should be "require"
-on\san? \b[^\s]*\b\sbasis                                                  % Phrasing: Too many words (i.e. "on a monthly basis" -> "monthly")
+on\san?\s\b[^\s]*\b\sbasis                                                 % Phrasing: Too many words (i.e. "on a monthly basis" -> "monthly")
 positive\sencouragement                                                    % Phrasing: Should be "encourage"
 reason\swhy                                                                % Phrasing: Redundant
 safe\sguard                                                                % Phrasing: Should be "safeguard"
@@ -132,9 +132,9 @@ til      % Spelling: Misspelled
 
 
 ## Syntax Errors
-<<<<<<< .                                        % Syntax: Unresolved CVS conflict!
+<<<<<<<\s.                                       % Syntax: Unresolved CVS conflict!
 =======                                          % Syntax: Unresolved CVS conflict!
->>>>>>> .                                        % Syntax: Unresolved CVS conflict!
+>>>>>>>\s.                                       % Syntax: Unresolved CVS conflict!
 \\caption\[.*?CCDF.*?\]                          % Syntax: short caption should not include graph type.
 \\caption\[.*?CDF.*?\]                           % Syntax: short caption should not include graph type.
 \\caption\[.{0,20}\]                             % Syntax: short caption should not be too short.
