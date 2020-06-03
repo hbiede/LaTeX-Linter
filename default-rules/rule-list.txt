@@ -35,6 +35,7 @@ section[~\s]\\ref             % Formatting: should have ~ between section and re
 
 ## Phrasing
 ((an?|the)\s*){2,}                                                         % Phrasing: Repeated articles
+(1|fir)st\sannual                                                          % Phrasing: "First annual" doesn't make sense
 (\w+)\b\s\1                                                                % Phrasing: Duplicate words
 (?<=(\.\s))(?<=(\.\s\s))and                                                % Phrasing: Don't start sentences with 'and'
 (?<=(\.\s))(?<=(\.\s\s))it                                                 % Phrasing: Don't start sentences with 'it'
@@ -110,6 +111,7 @@ small\snumbers? of                                                         % Phr
 so-called                                                                  % Phrasing: Can be abused; it's negative
 stuff                                                                      % Phrasing: Find a better word
 tackles?                                                                   % Phrasing: Should be "solve or address"
+that\sbeing\said                                                           % Phrasing: Should be left off
 their\s(are|is)                                                            % Phrasing: Should be "there are/is"
 things?                                                                    % Phrasing: Find a better word
 thusly                                                                     % Phrasing: Should be "thus"
