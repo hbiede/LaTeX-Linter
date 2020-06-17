@@ -88,6 +88,7 @@ great\sdeal\sof                                                            % Phr
 grouped\stogether                                                          % Phrasing: Should be "grouped"
 grows?\slarger                                                             % Phrasing: Should be "grow(s)"
 hard\sevidence                                                             % Phrasing: Should be "evidence"
+have\sto                                                                   % Phrasing: Should be "must"
 I'll                                                                       % Phrasing: Should be "I will"
 I've                                                                       % Phrasing: Should be "I have"
 in\sa\ssatisfactory\smanner                                                % Phrasing: Should be "satisfactorily"
@@ -96,6 +97,7 @@ includ(es|ing)\s[^\.]*?etc.?                                               % Phr
 including:                                                                 % Phrasing: Including leads directly into lists without semi-colons. Semi-colon lists should come after nouns
 intros?                                                                    % Phrasing: Should be "introduction" or "introduces"
 IPs                                                                        % Phrasing: Should be "IP addresses"
+kind(a|\sof)                                                               % Phrasing: Vague
 lead\sto                                                                   % Phrasing: Should be "leads to" or "led to"
 literally\slike                                                            % Phrasing: Literally means not a simile
 loosing                                                                    % Phrasing: Should be "losing", use "loosening" otherwise.
@@ -109,6 +111,8 @@ shortly                                                                    % Phr
 situations? in\swhich                                                      % Phrasing: Should be "when"
 small\snumbers? of                                                         % Phrasing: Should be "a few"
 so-called                                                                  % Phrasing: Can be abused; it's negative
+some\skind                                                                 % Phrasing: Too vague
+still\sremain                                                              % Phrasing: Should be "remain"
 stuff                                                                      % Phrasing: Find a better word
 tackles?                                                                   % Phrasing: Should be "solve or address"
 that\sbeing\said                                                           % Phrasing: Should be left off
