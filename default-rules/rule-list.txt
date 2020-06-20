@@ -1,133 +1,134 @@
 # Only the Capitalization tag matches case-sensitively
 
 ## Capitalization
-(?<!(\.\s))Internet                                                     % Capitalization: Don't capitalize internet if it's not the start of a sentence
-\\(sub)*section\{[a-z].*?\}                                             % Capitalization: Section titles should be capitalized
-\\(sub)+section\{\w[^}]*?[^:]\b(With|A|An|Is|And|For|To|The)\b[^}]*?\}  % Capitalization: Some words should't be capitalized
-euclidean                                                               % Capitalization: Capitalize the name Euclidean
-linux                                                                   % Capitalization: Capitalize Linux
-section~\\ref                                                           % Capitalization: capitalize section when saying Section X.
-I[PpMm](od|ad|hone|ac)                                                  % Capitalization: Apple's product lines prefixed with 'i' should be stylized with a lowercase 'i' followed by a capital letter
+(?<!(?:\.\s))Internet                                                        % Capitalization: Don't capitalize internet if it's not the start of a sentence
+\\(?:sub)*section\{[a-z].*?\}                                              % Capitalization: Section titles should be capitalized
+\\(?:sub)+section\{\w[^}]*?[^:]\b(?:With|A|An|Is|And|For|To|The)\b[^}]*?\} % Capitalization: Some words should't be capitalized
+euclidean                                                                  % Capitalization: Capitalize the name Euclidean
+linux                                                                      % Capitalization: Capitalize Linux
+section~\\ref                                                              % Capitalization: capitalize section when saying Section X.
+I[PpMm](?:od|ad|hone|ac)                                                   % Capitalization: Apple's product lines prefixed with 'i' should be stylized with a lowercase 'i' followed by a capital letter
 
 
 ## Formatting
-,[~\s]\\etal                  % Formatting: No commas before etal
-\s''                          % Formatting: Either you have a space before a closing quote or forgot to open a quote with back-ticks
-section[~\s]\\ref             % Formatting: should have ~ between section and ref
-\s---\s                       % Formatting: The em-dash should be right up against the words.
-\s---$                        % Formatting: The em-dash should be right up against the words.
-^---\s                        % Formatting: The em-dash should be right up against the words.
-\s--\s                        % Formatting: the en-dash should be between numbers.
-\s--$                         % Formatting: the en-dash should be between numbers.
-^--\s                         % Formatting: The en-dash should be between numbers.
-[<>](?!=)                     % Formatting: Should be \lt or \gt
-[<>]=                         % Formatting: Should be \leq or \geq
-''[\.,]                       % Formatting: End quotes go after punctuation like '.' and ','
-[\s]-[\s]                     % Formatting: A hyphen surrounded by space should probably be an emdash ('---')
-[0-9]+-[0-9]+                 % Formatting: Use an endash '--' for number ranges
-[;:]''                        % Formatting: End quotes go before (semi-)colons
-[0-9]+([kcmn][smg]|ft|mi|lbs) % Formatting: Put a space between the number and the unit
-[\.,!\?:;]{2,}                % Formatting: No consecutive punctuation; use ellipsis character (\dots) if necessary
-\s--\s                        % Formatting: That's an en-dash, you want an em-dash: "---"
-\s[\.,!\?:;]                  % Formatting: No French Spacing
-\w\(\w                        % Formatting: Put a space before parens, even when introducing acronyms.
+,[~\s]\\etal                    % Formatting: No commas before etal
+\s''                            % Formatting: Either you have a space before a closing quote or forgot to open a quote with back-ticks
+section[~\s]\\ref               % Formatting: should have ~ between section and ref
+\s---\s                         % Formatting: The em-dash should be right up against the words.
+\s---$                          % Formatting: The em-dash should be right up against the words.
+^---\s                          % Formatting: The em-dash should be right up against the words.
+\s--\s                          % Formatting: the en-dash should be between numbers.
+\s--$                           % Formatting: the en-dash should be between numbers.
+^--\s                           % Formatting: The en-dash should be between numbers.
+[<>](?!=)                       % Formatting: Should be \lt or \gt
+[<>]=                           % Formatting: Should be \leq or \geq
+''[\.,]                         % Formatting: End quotes go after punctuation like '.' and ','
+[\s]-[\s]                       % Formatting: A hyphen surrounded by space should probably be an emdash ('---')
+[0-9]+-[0-9]+                   % Formatting: Use an endash '--' for number ranges
+[;:]''                          % Formatting: End quotes go before (semi-)colons
+[0-9]+(?:[kcmn][smg]|ft|mi|lbs) % Formatting: Put a space between the number and the unit
+[\.,!\?:;]{2,}                  % Formatting: No consecutive punctuation; use ellipsis character (\dots) if necessary
+\s--\s                          % Formatting: That's an en-dash, you want an em-dash: "---"
+\s[\.,!\?:;]                    % Formatting: No French Spacing
+\w\(\w                          % Formatting: Put a space before parens, even when introducing acronyms.
 
 
 ## Phrasing
-((an?|the)\s*){2,}                                                         % Phrasing: Repeated articles
-(1|fir)st\sannual                                                          % Phrasing: "First annual" doesn't make sense
-(\w+)\b\s\1                                                                % Phrasing: Duplicate words
-(?<=(\.\s))(?<=(\.\s\s))and                                                % Phrasing: Don't start sentences with 'and'
-(?<=(\.\s))(?<=(\.\s\s))it                                                 % Phrasing: Don't start sentences with 'it'
-(\\eg|\\ie|\\viz|\\ibid|\\ia)[^,]                                          % Phrasing: Command must be followed by a comma
-(\\etal|\\etc|\\etseq|\\sic)[^\.]                                          % Phrasing: Command must be followed by a period
-(with|without|of|in|on|under(neath)?|to|and|or|an?|the|for)[\.,!\?:;]      % Phrasing: Some words should never end a sentence in formal writing
-(an?|the)\saffects?                                                        % Phrasing: Should be "an/the effect"
-(design|in)\sprincipals?                                                   % Phrasing: Should be "principle(s)"
-(especially|very|quite|really|more|most)\s(unique|abstract|necessary|true) % Phrasing: Absolute nouns shouldn't be modified
-(is|are)\s(able\sto|capable\sof)                                           % Phrasing: Should be "can" or "may"
-(to|can|will)\sillicit                                                     % Phrasing: Should be "to elicit"
-[dw]on't                                                                   % Phrasing: Should be "do not" or "will not"
-a\snumber\sof                                                              % Phrasing: Should be "many" or "some"
-absolutely|completely|quite                                                % Phrasing: Should rarely be used
-aforementioned                                                             % Phrasing: Too pretentious."
-ain't                                                                      % Phrasing: Should be literally anything else
-all\sof                                                                    % Phrasing: Should be "all"
-amount\sof\stimes?                                                         % Phrasing: Should be "duration(s)"
-an\sexample\sof\sthis\sis\sthe\sfact\sthat                                 % Phrasing: Should be "for example"
-and\s\\etc                                                                 % Phrasing: 'Et' already means 'and'
-are\sof\sthe\ssame\sopinions?                                              % Phrasing: Should be "agree"
-based\son\sthe\sfacts?                                                     % Phrasing: Should be "because"
-because\sof\sthe\sfacts?                                                   % Phrasing: Should be "because"
-by\smeans\sof                                                              % Phrasing: Should be "by" or "with"
-can\snot                                                                   % Phrasing: Should be "cannot"
-causal\sfactors?                                                           % Phrasing: Should be "cause(s)"
-comprise(d|s)\sof                                                          % Phrasing: Should be "composed of"
-connected\stogether                                                        % Phrasing: Should be "connected"
-consensus\sof\sopinion                                                     % Phrasing: Should be "consensus"
-considerable\samount\sof                                                   % Phrasing: Should be "much"
-considerable\snumber\sof                                                   % Phrasing: Should be "many"
-count\sthe\snumber\sof                                                     % Phrasing: Should be "count"
-decreased\samount\sof                                                      % Phrasing: Should be "less"
-decreased\snumber\sof                                                      % Phrasing: Should be "fewer"
-definitely\sproved                                                         % Phrasing: Should be "proved"
-different\svarieties                                                       % Phrasing: Should be "varieties"
-e-mail                                                                     % Phrasing: Should be "email"
-effectuate                                                                 % Phrasing: Should be "cause"
-enclosed\sherewith                                                         % Phrasing: Should be "enclosed"
-entirely\seliminate                                                        % Phrasing: Should be "eliminate"
-eradicate\scompletely                                                      % Phrasing: Should be "eradicate"
-excepting                                                                  % Phrasing: Should be "except"
-few\sin\snumbers?                                                          % Phrasing: Should be "few"
-fewer\sin\snumber                                                          % Phrasing: Should be "fewer"
-firstly                                                                    % Phrasing: Should be "first"
-for\s\\eg                                                                  % Phrasing: The 'for' is redundant
-for\sthe\sreason\sthat                                                     % Phrasing: Should be "because"
-further\smore                                                              % Phrasing: Should be "furthermore"
-great\sdeal\sof                                                            % Phrasing: Should be "much"
-grouped\stogether                                                          % Phrasing: Should be "grouped"
-grows?\slarger                                                             % Phrasing: Should be "grow(s)"
-hard\sevidence                                                             % Phrasing: Should be "evidence"
-have\sto                                                                   % Phrasing: Should be "must"
-I'll                                                                       % Phrasing: Should be "I will"
-I've                                                                       % Phrasing: Should be "I have"
-in\sa\ssatisfactory\smanner                                                % Phrasing: Should be "satisfactorily"
-in\sfact                                                                   % Phrasing: Should rarely be used
-includ(es|ing)\s[^\.]*?etc.?                                               % Phrasing: Including implies an incomplete list, so don't double up with an etc.
-including:                                                                 % Phrasing: Including leads directly into lists without semi-colons. Semi-colon lists should come after nouns
-intros?                                                                    % Phrasing: Should be "introduction" or "introduces"
-IPs                                                                        % Phrasing: Should be "IP addresses"
-kind(a|\sof)                                                               % Phrasing: Vague
-lead\sto                                                                   % Phrasing: Should be "leads to" or "led to"
-literally\slike                                                            % Phrasing: Literally means not a simile
-loosing                                                                    % Phrasing: Should be "losing", use "loosening" otherwise.
-loss\soff                                                                  % Phrasing: Should be "loss of"
-necessitate[ds]?                                                           % Phrasing: Should be "require"
-on\san?\s\b[^\s]*\b\sbasis                                                 % Phrasing: Too many words (i.e. "on a monthly basis" -> "monthly")
-positive\sencouragement                                                    % Phrasing: Should be "encourage"
-reason\swhy                                                                % Phrasing: Redundant
-safe\sguard                                                                % Phrasing: Should be "safeguard"
-shortly                                                                    % Phrasing: Should be "soon"
-situations? in\swhich                                                      % Phrasing: Should be "when"
-small\snumbers? of                                                         % Phrasing: Should be "a few"
-so-called                                                                  % Phrasing: Can be abused; it's negative
-some\skind                                                                 % Phrasing: Too vague
-still\sremain                                                              % Phrasing: Should be "remain"
-stuff                                                                      % Phrasing: Find a better word
-tackles?                                                                   % Phrasing: Should be "solve or address"
-that\sbeing\said                                                           % Phrasing: Should be left off
-their\s(are|is)                                                            % Phrasing: Should be "there are/is"
-things?                                                                    % Phrasing: Find a better word
-thusly                                                                     % Phrasing: Should be "thus"
-transpire                                                                  % Phrasing: Should be "happen"
-up\suntil                                                                  % Phrasing: Should be "until"
-utilizes?                                                                  % Phrasing: Should be "use"
-we'll                                                                      % Phrasing: Should be "we will"
-we've                                                                      % Phrasing: Should be "we have"
-what\sis\sthe\sexplanation\sof                                             % Phrasing: Should be "why"
-whether\sor\snot                                                           % Phrasing: Should be "whether"
-will\sbe\ssignificantly\sdifferent                                         % Phrasing: Should be "will differ significantly"
-within\sthe\srealm\sof\spossibility                                        % Phrasing: Should be "possible"
+(?:(?:an?|the)\s*){2,}                                                         % Phrasing: Repeated articles
+(?:1|fir)st\sannual                                                            % Phrasing: "First annual" doesn't make sense
+(?:\w+)\b\s\1                                                                  % Phrasing: Duplicate words
+(?:(?<=(?:\.\s))|(?<=(?:\.\s\s)))and                                           % Phrasing: Don't start sentences with 'and'
+(?:(?<=(?:\.\s))|(?<=(?:\.\s\s)))it                                            % Phrasing: Don't start sentences with 'it'
+(?:\\eg|\\ie|\\viz|\\ibid|\\ia)[^,]                                            % Phrasing: Command must be followed by a comma
+(?:\\etal|\\etc|\\etseq|\\sic)[^\.]                                            % Phrasing: Command must be followed by a period
+(?:with|without|of|in|on|under(?:neath)?|to|and|or|an?|the|for)[\.,!\?:;]      % Phrasing: Some words should never end a sentence in formal writing
+(?:an?|the)\saffects?                                                          % Phrasing: Should be "an/the effect"
+(?:design|in)\sprincipals?                                                     % Phrasing: Should be "principle(s)"
+(?:especially|very|quite|really|more|most)\s(?:unique|abstract|necessary|true) % Phrasing: Absolute nouns shouldn't be modified
+(?:is|are)\s(?:able\sto|capable\sof)                                           % Phrasing: Should be "can" or "may"
+(?:to|can|will)\sillicit                                                       % Phrasing: Should be "to elicit"
+[dw]on't                                                                       % Phrasing: Should be "do not" or "will not"
+a\snumber\sof                                                                  % Phrasing: Should be "many" or "some"
+absolutely|completely|quite                                                    % Phrasing: Should rarely be used
+aforementioned                                                                 % Phrasing: Too pretentious."
+ain't                                                                          % Phrasing: Should be literally anything else
+all\sof                                                                        % Phrasing: Should be "all"
+amount\sof\stimes?                                                             % Phrasing: Should be "duration(s)"
+an\sexample\sof\sthis\sis\sthe\sfact\sthat                                     % Phrasing: Should be "for example"
+and\s\\etc                                                                     % Phrasing: 'Et' already means 'and'
+are\sof\sthe\ssame\sopinions?                                                  % Phrasing: Should be "agree"
+based\son\sthe\sfacts?                                                         % Phrasing: Should be "because"
+because\sof\sthe\sfacts?                                                       % Phrasing: Should be "because"
+by\smeans\sof                                                                  % Phrasing: Should be "by" or "with"
+can\snot                                                                       % Phrasing: Should be "cannot"
+causal\sfactors?                                                               % Phrasing: Should be "cause(s)"
+comprise[ds]\sof                                                               % Phrasing: Should be "composed of"
+connected\stogether                                                            % Phrasing: Should be "connected"
+consensus\sof\sopinion                                                         % Phrasing: Should be "consensus"
+considerable\samount\sof                                                       % Phrasing: Should be "much"
+considerable\snumber\sof                                                       % Phrasing: Should be "many"
+count\sthe\snumber\sof                                                         % Phrasing: Should be "count"
+CSCE                                                                           % Phrasing: Should be "CSE"
+decreased\samount\sof                                                          % Phrasing: Should be "less"
+decreased\snumber\sof                                                          % Phrasing: Should be "fewer"
+definitely\sproved                                                             % Phrasing: Should be "proved"
+different\svarieties                                                           % Phrasing: Should be "varieties"
+e-mail                                                                         % Phrasing: Should be "email"
+effectuate                                                                     % Phrasing: Should be "cause"
+enclosed\sherewith                                                             % Phrasing: Should be "enclosed"
+entirely\seliminate                                                            % Phrasing: Should be "eliminate"
+eradicate\scompletely                                                          % Phrasing: Should be "eradicate"
+excepting                                                                      % Phrasing: Should be "except"
+few\sin\snumbers?                                                              % Phrasing: Should be "few"
+fewer\sin\snumber                                                              % Phrasing: Should be "fewer"
+firstly                                                                        % Phrasing: Should be "first"
+for\s\\eg                                                                      % Phrasing: The 'for' is redundant
+for\sthe\sreason\sthat                                                         % Phrasing: Should be "because"
+further\smore                                                                  % Phrasing: Should be "furthermore"
+great\sdeal\sof                                                                % Phrasing: Should be "much"
+grouped\stogether                                                              % Phrasing: Should be "grouped"
+grows?\slarger                                                                 % Phrasing: Should be "grow(s)"
+hard\sevidence                                                                 % Phrasing: Should be "evidence"
+have\sto                                                                       % Phrasing: Should be "must"
+I'll                                                                           % Phrasing: Should be "I will"
+I've                                                                           % Phrasing: Should be "I have"
+in\sa\ssatisfactory\smanner                                                    % Phrasing: Should be "satisfactorily"
+in\sfact                                                                       % Phrasing: Should rarely be used
+includ(?:es|ing)\s[^\.]*?etc.?                                                 % Phrasing: Including implies an incomplete list, so don't double up with an etc.
+including:                                                                     % Phrasing: Including leads directly into lists without semi-colons. Semi-colon lists should come after nouns
+intros?                                                                        % Phrasing: Should be "introduction" or "introduces"
+IPs                                                                            % Phrasing: Should be "IP addresses"
+kind(?:a|\sof)                                                                 % Phrasing: Vague
+lead\sto                                                                       % Phrasing: Should be "leads to" or "led to"
+literally\slike                                                                % Phrasing: Literally means not a simile
+loosing                                                                        % Phrasing: Should be "losing", use "loosening" otherwise.
+loss\soff                                                                      % Phrasing: Should be "loss of"
+necessitate[ds]?                                                               % Phrasing: Should be "require"
+on\san?\s\b[^\s]*\b\sbasis                                                     % Phrasing: Too many words (i.e. "on a monthly basis" -> "monthly")
+positive\sencouragement                                                        % Phrasing: Should be "encourage"
+reason\swhy                                                                    % Phrasing: Redundant
+safe\sguard                                                                    % Phrasing: Should be "safeguard"
+shortly                                                                        % Phrasing: Should be "soon"
+situations? in\swhich                                                          % Phrasing: Should be "when"
+small\snumbers?\sof                                                            % Phrasing: Should be "a few"
+so-called                                                                      % Phrasing: Can be abused; it's negative
+some\skind                                                                     % Phrasing: Too vague
+still\sremain                                                                  % Phrasing: Should be "remain"
+stuff                                                                          % Phrasing: Find a better word
+tackles?                                                                       % Phrasing: Should be "solve or address"
+that\sbeing\said                                                               % Phrasing: Should be left off
+their\s(?:are|is)                                                              % Phrasing: Should be "there are/is"
+things?                                                                        % Phrasing: Find a better word
+thusly                                                                         % Phrasing: Should be "thus"
+transpire                                                                      % Phrasing: Should be "happen"
+up\suntil                                                                      % Phrasing: Should be "until"
+utilizes?                                                                      % Phrasing: Should be "use"
+we'll                                                                          % Phrasing: Should be "we will"
+we've                                                                          % Phrasing: Should be "we have"
+what\sis\sthe\sexplanation\sof                                                 % Phrasing: Should be "why"
+whether\sor\snot                                                               % Phrasing: Should be "whether"
+will\sbe\ssignificantly\sdifferent                                             % Phrasing: Should be "will differ significantly"
+within\sthe\srealm\sof\spossibility                                            % Phrasing: Should be "possible"
 
 ## Spelling Errors - Limited to common mistakes. Should still run text through a proper spellcheck
 hte      % Spelling: Misspelled
@@ -138,14 +139,20 @@ til      % Spelling: Misspelled
 
 
 ## Syntax Errors
-<<<<<<<\s.                                       % Syntax: Unresolved CVS conflict!
-=======                                          % Syntax: Unresolved CVS conflict!
->>>>>>>\s.                                       % Syntax: Unresolved CVS conflict!
-\\caption\[.*?CCDF.*?\]                          % Syntax: short caption should not include graph type.
-\\caption\[.*?CDF.*?\]                           % Syntax: short caption should not include graph type.
-\\caption\[.{0,20}\]                             % Syntax: short caption should not be too short.
-\\caption\[[^\]]*[^\.]\]                         % Syntax: short caption should end with a period.
-\\etal[^{]                                       % Syntax: it's good practice to use \etal{} to avoid bad spacing
-\\url\{(?!http|ftp|rtsp|mailto)                  % Syntax: URLs should include a protocol (e.g. https://)
-\{\\em\s+[^\}]*?[:\.,]\}                         % Syntax: Punctuation at the edges of italic text is not italicized
-cf\.[^\\]                                        % Syntax: cf. should get an escaped space "\ "
+<<<<<<<\s.                                         % Syntax: Unresolved CVS conflict!
+=======                                            % Syntax: Unresolved CVS conflict!
+>>>>>>>\s.                                         % Syntax: Unresolved CVS conflict!
+\\caption\[.*?CCDF.*?\]                            % Syntax: short caption should not include graph type.
+\\caption\[.*?CDF.*?\]                             % Syntax: short caption should not include graph type.
+\\caption\[.{0,20}\]                               % Syntax: short caption should not be too short.
+\\caption\[[^\]]*[^\.]\]                           % Syntax: short caption should end with a period.
+\\etal[^{]                                         % Syntax: it's good practice to use \etal{} to avoid bad spacing
+\\url\{(?!http|ftp|rtsp|mailto)                    % Syntax: URLs should include a protocol (e.g. https://)
+[^{](?:cl|la|sl|pc)s?\b                            % Syntax: Use the glossary command for proper linking and abbreviation
+[^\\](?:e\.?g\.?|i\.?e\.?|e\.?t\.?c\.?|c\.?f\.?)\b % Syntax: Use the consistency commands
+[^{]course\sleaders?                               % Syntax: Use the glossary command for proper linking and abbreviation
+[^{]learning\sassistants?                          % Syntax: Use the glossary command for proper linking and abbreviation
+[^{]program\scommittee                             % Syntax: Use the glossary command for proper linking and abbreviation
+\bsenior\sleaders?                                 % Syntax: Use the glossary command for proper linking and abbreviation
+\{\\em\s+[^\}]*?[:\.,]\}                           % Syntax: Punctuation at the edges of italic text is not italicized
+#cf\.[^\\]                                          % Syntax: cf. should get an escaped space "\ "
