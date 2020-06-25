@@ -31,6 +31,7 @@ section[~\s]\\ref               % Formatting: should have ~ between section and 
 \s--\s                          % Formatting: That's an en-dash, you want an em-dash: "---"
 \s[\.,!\?:;]                    % Formatting: No French Spacing
 \w\(\w                          % Formatting: Put a space before parens, even when introducing acronyms.
+&                               % Formatting: Use "and" instead of any ampersands
 
 
 ## Phrasing
@@ -104,6 +105,8 @@ literally\slike                                                                %
 loosing                                                                        % Phrasing: Should be "losing", use "loosening" otherwise.
 loss\soff                                                                      % Phrasing: Should be "loss of"
 necessitate[ds]?                                                               % Phrasing: Should be "require"
+not\sable                                                                      % Phrasing: Should be "unable"
+not\sbe\sable                                                                  % Phrasing: Should be "be unable"
 on\san?\s\b[^\s]*\b\sbasis                                                     % Phrasing: Too many words (i.e. "on a monthly basis" -> "monthly")
 positive\sencouragement                                                        % Phrasing: Should be "encourage"
 reason\swhy                                                                    % Phrasing: Redundant
