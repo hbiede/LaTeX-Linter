@@ -276,5 +276,5 @@ if __name__ == '__main__':
 
     rules_broken_report = process_files(read_latex(), rules, command_regex)
     for rule_reported in rules_broken_report:
-        print(rule_reported)
+        print(rule_reported, file=sys.stderr)
     exit(len(rules_broken_report))
