@@ -29,12 +29,12 @@ section[~\s]\\ref               % Formatting: should have ~ between section and 
 [\.,!\?:;]{2,}                  % Formatting: No consecutive punctuation; use ellipsis character (\dots) if necessary
 \s--\s                          % Formatting: That's an en-dash, you want an em-dash: "---"
 \s[\.,!\?:;]                    % Formatting: No French Spacing
-\w\(\w                          % Formatting: Put a space before parens, even when introducing acronyms.
+\w\([^(e?s)]                    % Formatting: Put a space before parens, even when introducing acronyms.
 &                               % Formatting: Use "and" instead of any ampersands
 
 
 ## Phrasing
-(?:(?:an?|the)\s*){2,}                                                         % Phrasing: Repeated articles
+(?:(?:an?|the)[\s\.]+){2,}                                                     % Phrasing: Repeated articles
 (?:1|fir)st\sannual                                                            % Phrasing: "First annual" doesn't make sense
 (?:(?<=(?:\.\s))|(?<=(?:\.\s\s)))and                                           % Phrasing: Don't start sentences with 'and'
 (?:(?<=(?:\.\s))|(?<=(?:\.\s\s)))it                                            % Phrasing: Don't start sentences with 'it'
