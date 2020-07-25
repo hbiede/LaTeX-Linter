@@ -29,12 +29,14 @@ def get_all_files(directory: str) -> List[str]:
     :rtype: List[str]
     :return: A list of file paths in the given directory
     """
+    if isfile(directory):
+        return [directory]
     files = [f for f in listdir(directory) if isfile(join(directory, f))]
     try:
         files.remove('.DS_Store')
     except ValueError:
         pass
-    return list(map(lambda file: directory + file, files))
+    return list(map(lambda file: directory + ('' if directory[-1] == '/' else '/') + file, files))
 
 
 def read_rules() -> List[str]:
