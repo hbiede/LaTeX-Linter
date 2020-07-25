@@ -49,7 +49,7 @@ def read_rules() -> List[str]:
     # find rule set directory(ies) in the arguments
     rules_dirs = [i for i, arg in enumerate(sys.argv) if ['-r', '--rules'].__contains__(arg)]
 
-    if len(rules_dirs) is 0:
+    if len(rules_dirs) == 0:
         # Use default rule list
         rule_set_files = get_all_files(expanduser('~') + '/.latex-rules/')
     else:
@@ -93,7 +93,7 @@ def parse_rules(rule_list: List[str]) -> (Dict[Pattern, str], List[str]):
         'Capitalization': 0,
     }
     for rule_line in rule_list:
-        if rule_line.startswith('#') or len(rule_line) is 0:
+        if rule_line.startswith('#') or len(rule_line) == 0:
             continue
         try:
             rule_str, reasoning = rule_line.split("%", 1)
@@ -196,7 +196,7 @@ def remove_math(latex: Dict[str, List[str]]):
         for i in range(len(file)):
             new_line = ''
             for c in file[i]:
-                if c is '$':
+                if c == '$':
                     math_mode = not math_mode
                 elif not math_mode:
                     new_line += c
@@ -238,7 +238,7 @@ def process_files(file_lines: Dict[str, List[str]], rule_patterns: Dict[Pattern,
                 except ValueError:
                     line_break_index = len(combined_line)
                 error_line = i + 1 if error.span()[0] < line_break_index else i + 2
-                if error != '' and (len(errors) is 0 or not rules_broken.get(error_line, []).__contains__(rule_broken)):
+                if error != '' and (len(errors) == 0 or not rules_broken.get(error_line, []).__contains__(rule_broken)):
                     error_string = combined_line[max(0, min(line_break_index, error.span()[0] - 5)):
                                                  min(len(combined_line), error.span()[1] + 5)].strip().replace('\n',
                                                                                                                ' ')
@@ -265,7 +265,7 @@ def compile_command(commands: List[str]) -> Pattern:
 
 if __name__ == '__main__':
     rules, ignored_commands = parse_rules(read_rules())
-    if len(rules) is 0:
+    if len(rules) == 0:
         print("Define some rules before using", file=sys.stderr)
         exit(-1)
     ignored_commands.extend(default_commands.split('|'))
