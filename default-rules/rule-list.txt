@@ -24,7 +24,6 @@ section[~\s]\\ref               % Formatting: should have ~ between section and 
 [<>]=                           % Formatting: Should be \leq or \geq
 ''[\.,]                         % Formatting: End quotes go after punctuation like '.' and ','
 [\s]-[\s]                       % Formatting: A hyphen surrounded by space should probably be an emdash ('---')
-[0-9]+-[0-9]+                   % Formatting: Use an endash '--' for number ranges
 [;:]''                          % Formatting: End quotes go before (semi-)colons
 [0-9]+(?:[kcmn][smg]|ft|mi|lbs) % Formatting: Put a space between the number and the unit
 [\.,!\?:;]{2,}                  % Formatting: No consecutive punctuation; use ellipsis character (\dots) if necessary
@@ -37,7 +36,6 @@ section[~\s]\\ref               % Formatting: should have ~ between section and 
 ## Phrasing
 (?:(?:an?|the)\s*){2,}                                                         % Phrasing: Repeated articles
 (?:1|fir)st\sannual                                                            % Phrasing: "First annual" doesn't make sense
-(?:\w+)\b\s\1                                                                  % Phrasing: Duplicate words
 (?:(?<=(?:\.\s))|(?<=(?:\.\s\s)))and                                           % Phrasing: Don't start sentences with 'and'
 (?:(?<=(?:\.\s))|(?<=(?:\.\s\s)))it                                            % Phrasing: Don't start sentences with 'it'
 (?:\\eg|\\ie|\\viz|\\ibid|\\ia)[^,]                                            % Phrasing: Command must be followed by a comma
